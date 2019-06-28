@@ -1,15 +1,15 @@
 const express = require('express');
 const app = express();
-// const http = require('http').Server(app);
-const io = require('socket.io')(app);
+const https = require('https').Server(app);
 
 var PORT = process.env.PORT || 8080;
+const io = require('socket.io')(https);
 
 app.get('/', function (req, res) {
     res.render('chat.ejs');
 });
 
-io.sockets.on('connection', function (socket) {
+io.on('connection', function (socket) {
     socket.on('username', function (username) {
         socket.username = username;
         io.emit('is_online', '🔵 <i>' + socket.username + ' joined the chat..</i>');
@@ -26,6 +26,6 @@ io.sockets.on('connection', function (socket) {
 
 
 
-const server = http.listen(PORT, function () {
+const server = https.listen(PORT, function () {
     console.log('listening on *:8080');
 });
