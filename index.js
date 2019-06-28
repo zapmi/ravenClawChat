@@ -1,9 +1,9 @@
 const express = require('express');
 const app = express();
-const https = require('https').Server(app);
+const http = require('http').Server(app);
 
 var PORT = process.env.PORT || 8080;
-const io = require('socket.io')(https);
+const io = require('socket.io')(http);
 
 app.get('/', function (req, res) {
     res.render('chat.ejs');
@@ -26,6 +26,6 @@ io.on('connection', function (socket) {
 
 
 
-const server = https.listen(PORT, function () {
+const server = http.listen(PORT, function () {
     console.log('listening on *:8080');
 });
