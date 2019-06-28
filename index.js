@@ -9,7 +9,7 @@ app.get('/', function (req, res) {
     res.render('chat.ejs');
 });
 
-io.on('connection', function (socket) {
+io.sockets.on('connection', function (socket) {
     socket.on('username', function (username) {
         socket.username = username;
         io.emit('is_online', '🔵 <i>' + socket.username + ' joined the chat..</i>');
@@ -19,13 +19,12 @@ io.on('connection', function (socket) {
     })
 
     socket.on('chat_message', function (message) {
-        setInterval(() => io.emit('time', new Date().toTimeString()), 1000);
         io.emit('chat_message', '<strong>' + socket.username + '</strong>: ' + message);
     });
 });
 
-
+setInterval(() => io.emit('time', new Date().toTimeString()), 1000);
 
 const server = http.listen(PORT, function () {
-    console.log('listening on *:8080');
+    console.log('listening on port: ' + PORT);
 });
