@@ -1,11 +1,18 @@
 const express = require('express');
 const app = express();
 const http = require('http').Server(app);
-const io = require('socket.io')(http);
+// const io = require('socket.io')(http);
+const io = socketIO(server);
 
-app.get('/', function (req, res) {
-    res.render('chat.ejs');
-});
+const server = express()
+.use((req, res) => res.sendFile(chat.ejs))
+.listen(PORT, () => console.log('Listening on ${ PORT }'));
+
+// app.get('/', function (req, res) {
+//     res.render('chat.ejs');
+// });
+
+
 
 io.sockets.on('connection', function (socket) {
     socket.on('username', function (username) {
@@ -24,6 +31,6 @@ io.sockets.on('connection', function (socket) {
 
 
 
-const server = http.listen(PORT, function () {
-    // console.log('listening on *:8080');
-});
+// const server = http.listen(PORT, function () {
+//     console.log('listening on *:8080');
+// });
