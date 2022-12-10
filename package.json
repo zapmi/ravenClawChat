@@ -20,7 +20,7 @@
   "homepage": "https://github.com/zapmi/ravenClawChat#readme",
   "dependencies": {
     "ejs": "^2.6.2",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "http": "0.0.0",
     "nodemon": "^1.19.1",
     "socket.io": "^2.2.0"
